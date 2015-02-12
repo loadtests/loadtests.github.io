@@ -4,7 +4,6 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" type="text/css" href='css/bootstrap.min.css'>
-    <script src='https://code.jquery.com/jquery-2.1.3.min.js'></script>
     
     <style>
         .lt-home-bg {
@@ -42,7 +41,7 @@
             </div>
             
             <div id="navbar" class="navbar-collapse collapse">
-                <form class="navbar-form navbar-right" action="dashboard.html" method="GET">
+                <form class="navbar-form navbar-right" action="dashboard.html" method="GET" data-mockup-stub='Submit HTTP POST request to authenticate human user'>
                     <div class="form-group">
                         <label for="login-email" class="sr-only">Email address</label>
                         <input type="email" id="login-email" placeholder="Email address" class="form-control" required>
@@ -65,7 +64,7 @@
                         <h1>Customized cloud-based load testing</h1>
                         <p>Test your website or API's performance of realistic user workflows. Simulate up to x concurrent users performing a customized sequence of actions.</p>
                         <p>
-                            <a class="btn btn-info btn-lg" role="button" onclick="window.alert('Navigation to documentation page');return false;">Learn more &raquo;</a>
+                            <a class="btn btn-info btn-lg" role="button" data-mockup-stub="Navigate to documentation page">Learn more &raquo;</a>
                             <a class="btn btn-danger btn-sm" role="button" href='dashboard.html'>mockup: toDashboard &raquo;</a>
                         </p>
                     </div>
@@ -145,6 +144,8 @@
         </div>
     </main>
     
+    <script src='https://code.jquery.com/jquery-2.1.3.min.js'></script>
+    <script src='js/main.js'></script>
     <script>
         $('#signup-password2:invalid').keyup(function() {
             if (this.value === $('#signup-password').val()) {
