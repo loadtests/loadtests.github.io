@@ -24,17 +24,17 @@
 
         // Create the data table.
         data = new google.visualization.DataTable();
-        data.addColumn('string', 'Timestamp');
+        data.addColumn('number', 'Timestamp');
         data.addColumn('number', 'Code');
 
         // trying to add data row by row from points array
-        for(var i = 0; i < 10; i++) {
+        /*for(var i = 0; i < 10; i++) {
         //  document.write("[" + points[i].timestamp + ", " + points[i].code + "]\n");
           data.addRow(points[i]);
-        }
+        }*/
 
         // this worked before, just comment out above for loop and uncomment this
-        /*data.addRows([
+        data.addRows([
           [0, 67], [1, 88], [2, 77],
           [3, 93], [4, 85], [5, 91],
           [6, 71], [7, 78], [8, 93],
@@ -52,7 +52,7 @@
           [2, 83], [3, 96], [4, 77],
           [5, 89], [4, 89], [7, 84],
           [4, 92], [9, 98]
-        ]);*/
+        ]);
 
         // Set chart options
         options = {
