@@ -7,14 +7,16 @@
       var data;
       var options;
       var chart;
+      var points = new Array(10);
 
       // Load the Visualization API and the piechart package.
       google.load('visualization', '1.1', {'packages':['scatter']});
 
       // Set a callback to run when the Google Visualization API is loaded.
       google.setOnLoadCallback(drawChart);
-      testTimestamp();
 
+     // generate data points in points array
+      getPoints();
       // Callback that creates and populates a data table,
       // instantiates the scatter chart passes in the data and
       // draws it.
@@ -22,10 +24,16 @@
 
         // Create the data table.
         data = new google.visualization.DataTable();
-        data.addColumn('number', 'Timestamp');
+        data.addColumn('string', 'Timestamp');
         data.addColumn('number', 'Code');
-        data.addRows([ [1,2]
-        ]);
+
+        // trying to add data row by row from points array
+        for(var i = 0; i < 10; i++) {
+        //  document.write("[" + points[i].timestamp + ", " + points[i].code + "]\n");
+          data.addRow(points[i]);
+        }
+
+        // this worked before, just comment out above for loop and uncomment this
         /*data.addRows([
           [0, 67], [1, 88], [2, 77],
           [3, 93], [4, 85], [5, 91],
@@ -63,35 +71,129 @@
         chart.draw(data, options);
       }
 
-      function getTimestamp() {
+      function createTimestamp() {
         var d = new Date();
         var curr_date = d.getDate();
         var curr_month = d.getMonth();
         curr_month++;
         var curr_year = d.getFullYear();
-        return (curr_date + "-" + curr_month + "-" + curr_year);
+        var curr_hour = d.getHours();
+        var curr_min = d.getMinutes();
+        var curr_sec = d.getSeconds();
+        var curr_mil = d.getMilliseconds();
+        if (curr_min.length == 1) {
+          curr_min = "0" + curr_min;
+        }
+        if (curr_sec.length == 1) {
+          curr_sec = "0" + curr_sec;
+        }
+        if (curr_mil.length == 1) {
+          curr_mil = "00" + curr_mil;
+        } else if (curr_mil.length == 2) {
+          curr_mil = "0" + curr_mil;
+        }
+
+        return (curr_hour + ":" + curr_min + ":" + curr_sec + ":" + curr_mil + " " +
+                curr_date + "-" + curr_month + "-" + curr_year);
+      }
+
+      function createResponseCode() {
+        var randNum = getRandomInt(0,16);
+        var code = -1;
+
+        switch(randNum){
+          case 0:
+            code = 200;
+            break;
+          case 1:
+            code = 201;
+            break;
+          case 2:
+            code = 202;
+            break;
+          case 3:
+            code = 203;
+            break;
+          case 4:
+            code = 204;
+            break;
+          case 5:
+            code = 205;
+            break;
+          case 6:
+            code = 400;
+            break;
+          case 7:
+            code = 401;
+            break;
+          case 8:
+            code = 402;
+            break;
+          case 9:
+            code = 403;
+            break;
+          case 10:
+            code = 404;
+            break;
+          case 11:
+            code = 405;
+            break;
+          case 12:
+            code = 500;
+            break;
+          case 13:
+            code = 501;
+            break;
+          case 14:
+            code = 502;
+            break;
+          case 15:
+            code = 503;
+            break;
+          case 16:
+            code = 504;
+            break;
+          }
+
+          return code;
+      }
+
+      function getTimestamp() {
+        alert(createTimestamp());
       }
 
       function getResponseCode() {
-
-      }
-
-      function testTimestamp() {
-        alert(getTimestamp());
-      }
-
-      function testResponseCode() {
-        alert(getResponseCode());
+        alert(createResponseCode());
       }
 
       function getRandomInt(min, max) {
         return Math.floor(Math.random() * (max - min + 1) + min);
       }
+
+      function Point(timestamp, code) {
+        this.timestamp = timestamp;
+        this.code = code;
+      }
+
+      function getPoints() {
+        var point = createPoint();
+        for (var i = 0; i < 9; i++) {
+          points[i] = point;
+          point = createPoint();
+        }
+      }
+
+      function createPoint() {
+        var timestamp = createTimestamp();
+        var code = createResponseCode();
+        var point = new Point(timestamp, code);
+        return point;
+      }
     </script>
   </head>
 
   <body>
-    <!--Div that will hold the pie chart-->
+    <!--Div that will hold the scatter chart-->
     <div id="chart_div"></div>
   </body>
 </html>
