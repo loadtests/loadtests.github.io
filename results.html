@@ -24,17 +24,16 @@
 
         // Create the data table.
         data = new google.visualization.DataTable();
-        data.addColumn('number', 'Timestamp');
+        data.addColumn('date', 'Timestamp');
         data.addColumn('number', 'Code');
 
         // trying to add data row by row from points array
-        /*for(var i = 0; i < 10; i++) {
-        //  document.write("[" + points[i].timestamp + ", " + points[i].code + "]\n");
-          data.addRow(points[i]);
-        }*/
+        points.forEach(function (point) {
+          data.addRow([point.timestamp, point.code]);
+        });
 
         // this worked before, just comment out above for loop and uncomment this
-        data.addRows([
+        /*data.addRows([
           [0, 67], [1, 88], [2, 77],
           [3, 93], [4, 85], [5, 91],
           [6, 71], [7, 78], [8, 93],
@@ -52,7 +51,7 @@
           [2, 83], [3, 96], [4, 77],
           [5, 89], [4, 89], [7, 84],
           [4, 92], [9, 98]
-        ]);
+        ]);*/
 
         // Set chart options
         options = {
@@ -93,8 +92,10 @@
           curr_mil = "0" + curr_mil;
         }
 
-        return (curr_hour + ":" + curr_min + ":" + curr_sec + ":" + curr_mil + " " +
-                curr_date + "-" + curr_month + "-" + curr_year);
+        return d;
+
+        /*return (curr_hour + ":" + curr_min + ":" + curr_sec + ":" + curr_mil + " " +
+                curr_date + "-" + curr_month + "-" + curr_year);*/
       }
 
       function createResponseCode() {
